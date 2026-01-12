@@ -2,6 +2,8 @@ import Bid from "../models/Bid.js";
 import Gig from "../models/Gig.js";
 import mongoose from "mongoose";
 
+import { getIO } from "../config/socket.js";
+
 // @desc    Submit a bid on a gig
 // @route   POST /api/bids
 // @access  Private
@@ -116,16 +118,13 @@ export const hireBid = async (req, res) => {
       });
     }
 
-    // 1. Update selected bid → hired
+    // 1. Mark selected bid as hired
     bid.status = "hired";
     await bid.save({ session });
 
     // 2. Reject all other bids
     await Bid.updateMany(
-      {
-        gigId: gig._id,
-        _id: { $ne: bid._id },
-      },
+      { gigId: gig._id, _id: { $ne: bid._id } },
       { status: "rejected" },
       { session }
     );
@@ -134,8 +133,18 @@ export const hireBid = async (req, res) => {
     gig.status = "assigned";
     await gig.save({ session });
 
+    // ✅ COMMIT TRANSACTION
     await session.commitTransaction();
 
+    // 🔔 SOCKET.IO EMIT (ADD THIS PART)
+    const io = getIO();
+    io.to(bid.freelancerId.toString()).emit("hired", {
+      message: `You have been hired for "${gig.title}"`,
+      gigId: gig._id,
+      bidId: bid._id,
+    });
+
+    // 4. Response
     res.status(200).json({
       message: "Freelancer hired successfully",
       hiredBid: bid,
