@@ -83,7 +83,8 @@ export const loginUser = async (req, res) => {
 res.cookie("token", token, {
   httpOnly: true,
   secure: true,       // 🔑 ONLY true in production
-  sameSite: "none",    // 🔑 Adjust based on your client-server setup
+  sameSite: "none", 
+   path: "/",    // 🔑 Adjust based on your client-server setup
   maxAge: 7 * 24 * 60 * 60 * 1000,
 });
 
@@ -114,6 +115,7 @@ export const logoutUser = async (req, res) => {
   httpOnly: true,
   secure: true,
   sameSite: "none",
+   path: "/", 
   expires: new Date(0),
 });
 
