@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Dashboard from "./pages/DashBoard";
+
 import Gigs from "./pages/Gigs";
 import PlaceBid from "./pages/PlaceBid";
 import GigBids from "./pages/GigBids";
@@ -11,6 +11,7 @@ import Navbar from "./components/Navbar";
 import NotificationToast from "./components/NotificationToast";
 import PublicRoute from "./components/PublicRoute";
 import ProtectedRoute from "./components/ProtectedRoute";
+import DashBoard from "./pages/DashBoard";
 
 
 function App() {
@@ -44,7 +45,7 @@ function App() {
     path="/dashboard"
     element={
       <ProtectedRoute>
-        <Dashboard />
+        <DashBoard />
       </ProtectedRoute>
     }
   />
