@@ -7,13 +7,11 @@ import bidRoutes from "./routes/bidRoutes.js";
 
 const app = express();
 
-// 🔴 REQUIRED for Render / HTTPS cookies
+// 🔥 REQUIRED FOR HTTPS COOKIES ON RENDER
 app.set("trust proxy", 1);
 
-// Middlewares
 app.use(express.json());
 
-// 🔴 SIMPLE + CORRECT CORS FOR COOKIES
 app.use(
   cors({
     origin: "https://gig-flow-project-975g.vercel.app",
@@ -28,12 +26,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/gigs", gigRoutes);
 app.use("/api/bids", bidRoutes);
 
-// Health check
 app.get("/api/health", (req, res) => {
-  res.status(200).json({
-    status: "ok",
-    message: "GigFlow backend running",
-  });
+  res.status(200).json({ status: "ok" });
 });
 
 export default app;
