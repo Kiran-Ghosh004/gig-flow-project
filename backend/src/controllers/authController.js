@@ -1,5 +1,5 @@
 import User from "../models/User.js";
-import bcrypt from "bcryptjs";
+import bcrypt, { truncates } from "bcryptjs";
 
 import jwt from "jsonwebtoken";
 
@@ -78,12 +78,12 @@ export const loginUser = async (req, res) => {
     );
 
     // 5. Set HttpOnly cookie
-   const isProduction = process.env.NODE_ENV === "production";
+   
 
 res.cookie("token", token, {
   httpOnly: true,
-  secure: isProduction,       // 🔑 ONLY true in production
-  sameSite: isProduction ? "none" : "lax",
+  secure: true,       // 🔑 ONLY true in production
+  sameSite: "none",    // 🔑 Adjust based on your client-server setup
   maxAge: 7 * 24 * 60 * 60 * 1000,
 });
 
@@ -108,12 +108,12 @@ res.cookie("token", token, {
 // @route   POST /api/auth/logout
 // @access  Private
 export const logoutUser = async (req, res) => {
-  const isProduction = process.env.NODE_ENV === "production";
+  
   try {
     res.cookie("token", "", {
   httpOnly: true,
-  secure: isProduction,
-  sameSite: isProduction ? "none" : "lax",
+  secure: true,
+  sameSite: "none",
   expires: new Date(0),
 });
 
