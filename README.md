@@ -76,23 +76,36 @@ The platform is built with **secure authentication, role-based actions, and a mo
 ### Backend
 
 backend/
+
 ├── controllers/
+
 ├── models/
+
 ├── routes/
+
 ├── middleware/
+
 ├── config/
+
 ├── utils/
+
 ├── app.js
+
 └── server.js
 
 
 ### Frontend
 
 frontend/
+
 ├── components/
+
 ├── pages/
+
 ├── context/
+
 ├── App.jsx
+
 └── main.jsx
 
 ---
@@ -146,6 +159,7 @@ cd frontend
 npm install
 npm run dev
 
+---
 API highlight
 
 | Method | Endpoint                | Description     |
