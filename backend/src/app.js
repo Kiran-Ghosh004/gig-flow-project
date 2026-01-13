@@ -7,6 +7,9 @@ import bidRoutes from "./routes/bidRoutes.js";
 
 const app = express();
 
+// 🔴 REQUIRED for secure cookies behind Render / reverse proxy
+app.set("trust proxy", 1);
+
 const allowedOrigins = [
   "https://gig-flow-project-975g.vercel.app",
 ];
