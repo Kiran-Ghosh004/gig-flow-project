@@ -11,7 +11,10 @@ import Navbar from "./components/Navbar";
 import NotificationToast from "./components/NotificationToast";
 import PublicRoute from "./components/PublicRoute";
 import ProtectedRoute from "./components/ProtectedRoute";
-import DashBoard from "./pages/DashBoard";
+import Dashboard from "./pages/Temperory";
+
+
+
 
 
 function App() {
@@ -45,7 +48,7 @@ function App() {
     path="/dashboard"
     element={
       <ProtectedRoute>
-        <DashBoard />
+        <Dashboard />
       </ProtectedRoute>
     }
   />

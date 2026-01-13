@@ -5,7 +5,7 @@ import axios from "axios";
 import StatusBadge from "../components/StatusBadge";
 
 
-const DashBoard = () => {
+const Dashboard = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -116,4 +116,4 @@ const DashBoard = () => {
   );
 };
 
-export default DashBoard;
+export default Dashboard;
