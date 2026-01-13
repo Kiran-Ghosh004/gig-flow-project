@@ -7,30 +7,29 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // 🔐 Fetch logged-in user using JWT
-  const fetchUser = async () => {
+  useEffect(() => {
     const token = localStorage.getItem("token");
 
     // ❌ No token → not logged in
     if (!token) {
-      setUser(null);
       setLoading(false);
       return;
     }
 
-    try {
-      const res = await api.get("/api/auth/me");
-      setUser(res.data);
-    } catch (error) {
-      // ❌ Token invalid / expired
-      localStorage.removeItem("token");
-      setUser(null);
-    } finally {
-      setLoading(false);
-    }
-  };
+    // ✅ Token exists → fetch user
+    const fetchUser = async () => {
+      try {
+        const res = await api.get("/api/auth/me");
+        setUser(res.data);
+      } catch (err) {
+        // ❌ Invalid token → clear it
+        localStorage.removeItem("token");
+        setUser(null);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  useEffect(() => {
     fetchUser();
   }, []);
 
