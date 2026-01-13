@@ -78,12 +78,15 @@ export const loginUser = async (req, res) => {
     );
 
     // 5. Set HttpOnly cookie
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "none",
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-    });
+   const isProduction = process.env.NODE_ENV === "production";
+
+res.cookie("token", token, {
+  httpOnly: true,
+  secure: isProduction,       // 🔑 ONLY true in production
+  sameSite: isProduction ? "none" : "lax",
+  maxAge: 7 * 24 * 60 * 60 * 1000,
+});
+
 
     // 6. Response
     res.status(200).json({
@@ -105,13 +108,14 @@ export const loginUser = async (req, res) => {
 // @route   POST /api/auth/logout
 // @access  Private
 export const logoutUser = async (req, res) => {
+  const isProduction = process.env.NODE_ENV === "production";
   try {
     res.cookie("token", "", {
-      httpOnly: true,
-      expires: new Date(0),
-      sameSite: "none",
-      secure: true,
-    });
+  httpOnly: true,
+  secure: isProduction,
+  sameSite: isProduction ? "none" : "lax",
+  expires: new Date(0),
+});
 
     res.status(200).json({
       message: "Logged out successfully",
