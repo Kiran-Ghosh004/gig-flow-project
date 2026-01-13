@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import api from "../utils/api";
 
 const CreateGig = () => {
   const navigate = useNavigate();

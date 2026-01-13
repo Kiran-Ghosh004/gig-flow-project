@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
+import api from "../utils/api";
 
 const Login = () => {
   const { setUser } = useAuth();
@@ -25,10 +26,7 @@ const Login = () => {
       );
 
       // Fetch user after login
-      const res = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/auth/me`,
-        { withCredentials: true }
-      );
+      const res = await api.get("/api/auth/me");
 
       setUser(res.data);
       navigate("/dashboard");

@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
+import api from "../utils/api";
 
 const AuthContext = createContext(null);
 
@@ -10,9 +11,7 @@ export const AuthProvider = ({ children }) => {
   // Fetch logged-in user using cookie
   const fetchUser = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/me`, {
-        withCredentials: true,
-      });
+      const res = await api.get("/api/auth/me");
       setUser(res.data);
     } catch (error) {
       setUser(null);

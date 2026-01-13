@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate, useLocation } from "react-router-dom";
+import api from "../utils/api";
 
 const Navbar = () => {
   const { user, setUser } = useAuth();
