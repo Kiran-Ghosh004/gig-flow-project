@@ -68,13 +68,21 @@ MongoDB Transactions
 Backend
 
 backend/
+
 ├── controllers/
+
 ├── models/
+
 ├── routes/
+
 ├── middleware/
+
 ├── config/
+
 ├── utils/
+
 ├── app.js
+
 └── server.js
 
 Frontend
@@ -86,40 +94,45 @@ frontend/
 ├── App.jsx
 └── main.jsx
 
-🔄 Application Flow
 
-Client Flow
+---
 
-Register / Login
-Create a gig
-View bids on the gig
-Hire a freelancer
-Freelancer receives real-time notification
+## 🔄 Application Flow
 
-Freelancer Flow
+### Client Flow
+1. Register / Login  
+2. Create a gig  
+3. View bids on the gig  
+4. Hire a freelancer  
+5. Freelancer receives a real-time notification  
 
-Register / Login
-Browse gigs
-View gig + client details
-Place a bid
-Get notified instantly when hired
+### Freelancer Flow
+1. Register / Login  
+2. Browse gigs  
+3. View gig & client details  
+4. Place a bid  
+5. Get notified instantly when hired  
 
-🧪 Important Validations
+---
 
-❌ Cannot bid on own gig
-❌ Cannot place multiple bids on same gig
-❌ Cannot hire more than one freelancer
-❌ Cannot access protected routes when logged out
-❌ Cannot access login/register when logged in
+## 🧪 Important Validations
+- ❌ Cannot bid on own gig
+- ❌ Cannot place multiple bids on the same gig
+- ❌ Cannot hire more than one freelancer
+- ❌ Cannot access protected routes when logged out
+- ❌ Cannot access login/register pages when logged in
 
-⚙️ Environment Variables
+---
 
-Backend .env
+## ⚙️ Environment Variables
 
+### Backend `.env`
+```env
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
 NODE_ENV=development
+
 
 ▶️ Run Locally
 
