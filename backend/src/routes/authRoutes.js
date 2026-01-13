@@ -1,5 +1,9 @@
 import express from "express";
-import { registerUser, loginUser,logoutUser  } from "../controllers/authController.js";
+import {
+  registerUser,
+  loginUser,
+  logoutUser,
+} from "../controllers/authController.js";
 import protect from "../middleware/authMiddleware.js";
 
 const router = express.Router();
@@ -7,6 +11,8 @@ const router = express.Router();
 router.post("/register", registerUser);
 router.post("/login", loginUser);
 router.post("/logout", protect, logoutUser);
+
+// ✅ FIXED /me ROUTE
 router.get("/me", protect, (req, res) => {
   res.status(200).json(req.user);
 });
