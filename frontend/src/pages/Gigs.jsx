@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import api from "../utils/api";
+// import api from "../utils/api";
 
 const Gigs = () => {
   const [gigs, setGigs] = useState([]);
