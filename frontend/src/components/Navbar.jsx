@@ -1,8 +1,8 @@
 import { useState } from "react";
-import axios from "axios";
+
 import { useAuth } from "../context/AuthContext";
 import { useNavigate, useLocation } from "react-router-dom";
-import api from "../utils/api";
+
 
 const Navbar = () => {
   const { user, setUser } = useAuth();
@@ -15,19 +15,17 @@ const Navbar = () => {
     return null;
   }
 
-  const handleLogout = async () => {
-    try {
-      await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/auth/logout`,
-        {},
-        { withCredentials: true }
-      );
-      setUser(null);
-      navigate("/login");
-    } catch (error) {
-      console.error("Logout failed");
-    }
-  };
+  const handleLogout = () => {
+  // 🔐 Remove JWT
+  localStorage.removeItem("token");
+
+  // ❌ Clear user from context
+  setUser(null);
+
+  // 🔁 Redirect to login
+  navigate("/login");
+};
+
 
   return (
     <>

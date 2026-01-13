@@ -18,16 +18,18 @@ const Login = () => {
     setLoading(true);
 
     try {
-      // ✅ Login (cookie stored correctly)
-      await api.post("/api/auth/login", {
+      // 🔐 LOGIN → get token + user
+      const res = await api.post("/api/auth/login", {
         email,
         password,
       });
 
-      // ✅ Fetch logged-in user
-      const res = await api.get("/api/auth/me");
+      // ✅ SAVE TOKEN (JWT)
+      localStorage.setItem("token", res.data.token);
 
-      setUser(res.data);
+      // ✅ SET USER
+      setUser(res.data.user);
+
       navigate("/dashboard");
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");

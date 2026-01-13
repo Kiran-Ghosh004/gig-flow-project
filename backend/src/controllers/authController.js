@@ -49,61 +49,49 @@ export const registerUser = async (req, res) => {
 };
 
 
+
+
 export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // 1. Validate
     if (!email || !password) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
-    // 2. Find user
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
-    // 3. Compare password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
-    // 4. Generate JWT HERE (inline)
     const token = jwt.sign(
       { id: user._id },
       process.env.JWT_SECRET,
       { expiresIn: "7d" }
     );
 
-    // 5. Set HttpOnly cookie
-   
-
-res.cookie("token", token, {
-  httpOnly: true,
-  secure: true,       // 🔑 ONLY true in production
-  sameSite: "none", 
-   path: "/",    // 🔑 Adjust based on your client-server setup
-  maxAge: 7 * 24 * 60 * 60 * 1000,
-});
-
-
-    // 6. Response
+    // ✅ RETURN TOKEN (NO COOKIE)
     res.status(200).json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      message: "Login successful",
+      token,
+      user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+      },
     });
   } catch (error) {
-    console.error("LOGIN ERROR:", error);
     res.status(500).json({
       message: "Server error",
       error: error.message,
     });
   }
 };
+
 
 // @desc    Logout user
 // @route   POST /api/auth/logout

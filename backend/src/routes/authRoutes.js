@@ -12,9 +12,9 @@ router.post("/register", registerUser);
 router.post("/login", loginUser);
 router.post("/logout", protect, logoutUser);
 
-// ✅ FIXED /me ROUTE
 router.get("/me", protect, (req, res) => {
   res.status(200).json(req.user);
 });
+
 
 export default router;
