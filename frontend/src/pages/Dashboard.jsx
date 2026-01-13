@@ -5,7 +5,7 @@ import axios from "axios";
 import StatusBadge from "../components/StatusBadge";
 
 
-const Dashboard = () => {
+const DashBoard = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
 
