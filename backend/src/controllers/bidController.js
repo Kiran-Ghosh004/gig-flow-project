@@ -159,3 +159,27 @@ export const hireBid = async (req, res) => {
     session.endSession();
   }
 };
+
+
+
+// @desc    Get bids placed by logged-in freelancer
+// @route   GET /api/bids/my
+// @access  Private
+export const getMyBids = async (req, res) => {
+  try {
+    const bids = await Bid.find({
+      freelancerId: req.user._id,
+    })
+      .populate("gigId", "title status")
+      .sort({ createdAt: -1 });
+
+    res.status(200).json(bids);
+  } catch (error) {
+    console.error("GET MY BIDS ERROR:", error);
+    res.status(500).json({
+      message: "Server error",
+      error: error.message,
+    });
+  }
+};
+
