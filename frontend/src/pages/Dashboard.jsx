@@ -116,4 +116,4 @@ const DashBoard = () => {
   );
 };
 
-export default Dashboard;
+export default DashBoard;
