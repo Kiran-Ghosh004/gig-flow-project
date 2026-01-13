@@ -7,30 +7,20 @@ import bidRoutes from "./routes/bidRoutes.js";
 
 const app = express();
 
-// 🔴 REQUIRED for secure cookies behind Render / reverse proxy
+// 🔴 REQUIRED for Render / HTTPS cookies
 app.set("trust proxy", 1);
-
-const allowedOrigins = [
-  "https://gig-flow-project-975g.vercel.app",
-];
 
 // Middlewares
 app.use(express.json());
+
+// 🔴 SIMPLE + CORRECT CORS FOR COOKIES
 app.use(
   cors({
-    origin: function (origin, callback) {
-      // Allow server-to-server, Postman, etc.
-      if (!origin) return callback(null, true);
-
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      } else {
-        return callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: "https://gig-flow-project-975g.vercel.app",
     credentials: true,
   })
 );
+
 app.use(cookieParser());
 
 // Routes
