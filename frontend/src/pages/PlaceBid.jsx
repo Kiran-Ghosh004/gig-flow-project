@@ -19,10 +19,10 @@ const PlaceBid = () => {
     const fetchData = async () => {
       try {
         const [gigRes, myBidsRes] = await Promise.all([
-          axios.get(`http://localhost:5000/api/gigs/${gigId}`, {
+          axios.get(`${import.meta.env.VITE_API_URL}/api/gigs/${gigId}`, {
             withCredentials: true,
           }),
-          axios.get("http://localhost:5000/api/bids/my", {
+          axios.get(`${import.meta.env.VITE_API_URL}/api/bids/my`, {
             withCredentials: true,
           }),
         ]);
@@ -49,7 +49,7 @@ const PlaceBid = () => {
 
     try {
       await axios.post(
-        "http://localhost:5000/api/bids",
+        `${import.meta.env.VITE_API_URL}/api/bids`,
         { gigId, price, message },
         { withCredentials: true }
       );

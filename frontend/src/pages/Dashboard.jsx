@@ -16,10 +16,10 @@ const Dashboard = () => {
     const fetchDashboardData = async () => {
       try {
         const [gigsRes, bidsRes] = await Promise.all([
-          axios.get("http://localhost:5000/api/gigs/my", {
+          axios.get(`${import.meta.env.VITE_API_URL}/api/gigs/my`, {
             withCredentials: true,
           }),
-          axios.get("http://localhost:5000/api/bids/my", {
+          axios.get(`${import.meta.env.VITE_API_URL}/api/bids/my`, {
             withCredentials: true,
           }),
         ]);

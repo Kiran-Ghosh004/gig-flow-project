@@ -12,7 +12,7 @@ const GigBids = () => {
     const fetchBids = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/bids/${gigId}`,
+          `${import.meta.env.VITE_API_URL}/api/bids/${gigId}`,
           { withCredentials: true }
         );
         setBids(res.data);
@@ -29,7 +29,7 @@ const GigBids = () => {
   const handleHire = async (bidId) => {
     try {
       await axios.patch(
-        `http://localhost:5000/api/bids/${bidId}/hire`,
+        `${import.meta.env.VITE_API_URL}/api/bids/${bidId}/hire`,
         {},
         { withCredentials: true }
       );

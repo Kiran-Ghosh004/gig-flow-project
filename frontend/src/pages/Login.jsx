@@ -19,14 +19,14 @@ const Login = () => {
 
     try {
       await axios.post(
-        "http://localhost:5000/api/auth/login",
+        `${import.meta.env.VITE_API_URL}/api/auth/login`,
         { email, password },
         { withCredentials: true }
       );
 
       // Fetch user after login
       const res = await axios.get(
-        "http://localhost:5000/api/auth/me",
+        `${import.meta.env.VITE_API_URL}/api/auth/me`,
         { withCredentials: true }
       );
 
