@@ -7,14 +7,8 @@ import bidRoutes from "./routes/bidRoutes.js";
 
 const app = express();
 
-/**
- * ✅ Allowed origins
- * - Local frontend (Vite)
- * - Add Vercel URL later after frontend deploy
- */
 const allowedOrigins = [
-  "http://localhost:5173",
-  // "https://your-frontend.vercel.app"  // add later
+  "https://gig-flow-project-975g.vercel.app",
 ];
 
 // Middlewares
@@ -22,7 +16,7 @@ app.use(express.json());
 app.use(
   cors({
     origin: function (origin, callback) {
-      // allow requests with no origin (Postman, mobile apps)
+      // Allow server-to-server, Postman, etc.
       if (!origin) return callback(null, true);
 
       if (allowedOrigins.includes(origin)) {

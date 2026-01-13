@@ -14,9 +14,6 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./pages/Temperory";
 
 
-
-
-
 function App() {
   return (
     <BrowserRouter>
